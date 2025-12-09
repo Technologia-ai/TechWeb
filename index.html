@@ -15,8 +15,9 @@
 <main>
     <!-- Microphone / Camera Access -->
     <section id="mediaSection">
-        <h2>Voice &amp; Video Helper</h2>
-        <p>Tap the button below and when the browser asks, press <strong>Allow</strong> so the helper can use your microphone and camera.</p>
+        <h2>Voice & Video Helper</h2>
+        <p>Tap the button below and allow access so the helper can use your microphone and camera.</p>
+        <!-- IMPORTANT: onclick must match function name exactly -->
         <button onclick="startMedia()">Start Mic & Camera</button>
         <p id="mediaStatus"></p>
         <video id="mediaPreview" autoplay playsinline muted></video>
@@ -108,4 +109,5 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
