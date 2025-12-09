@@ -167,16 +167,19 @@ Try making a simple stir fry! Sauté your ingredients with garlic, soy sauce, an
 
 // ========== Resume Builder ==========
 function generateResume() {
-  const name = document.getElementById("resName").value;
-  const email = document.getElementById("resEmail").value;
-  const skills = document.getElementById("resSkills").value;
-  const summary = document.getElementById("resSummary").value;
+  const name = document.getElementById("resName").value.trim();
+  const email = document.getElementById("resEmail").value.trim();
+  const skills = document.getElementById("resSkills").value.trim();
+  const summary = document.getElementById("resSummary").value.trim();
 
-  let resumeHTML = "";
-  if (name) resumeHTML += `<h3>${name}</h3>`;
-  if (email) resumeHTML += `<p><strong>Email:</strong> ${email}</p>`;
-  if (skills) resumeHTML += `<p><strong>Skills:</strong> ${skills}</p>`;
-  if (summary) resumeHTML += `<p><strong>Summary:</strong> ${summary}</p>`;
+  let html = "";
+  if (name) html += `<h3>${name}</h3>`;
+  if (email) html += `<p><strong>Email:</strong> ${email}</p>`;
+  if (skills) html += `<p><strong>Skills:</strong> ${skills}</p>`;
+  if (summary) html += `<p><strong>Summary:</strong> ${summary}</p>`;
 
-  document.getElementById("resumeOutput").innerHTML = resumeHTML || "Fill details above.";
+  document.getElementById("resumeOutput").innerHTML =
+    html || "Please fill in some details above first.";
 }
+
+
