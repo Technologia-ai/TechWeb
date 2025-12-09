@@ -90,17 +90,53 @@
         <p id="recipeResult"></p>
     </section>
 
-    <!-- Simple Resume Builder -->
-    <section id="resumeSection">
-        <h2>Simple Resume Builder</h2>
-        <input type="text" id="resName" placeholder="Your Name">
-        <input type="email" id="resEmail" placeholder="Your Email">
-        <textarea id="resSkills" placeholder="Your skills (comma separated)"></textarea>
-        <textarea id="resSummary" placeholder="Short professional summary"></textarea>
-        <button onclick="generateResume()">Generate Resume</button>
-        <div id="resumeOutput"></div>
-    </section>
-
+<!-- Simple Resume Builder with Photo & PDF Download -->
+<section id="resumeSection">
+    <h2>Professional Resume Builder</h2>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <!-- Left: Input Form -->
+        <div>
+            <h3>Enter Details</h3>
+            <label>Upload Photo:</label>
+            <input type="file" id="resumePhoto" accept="image/*" style="width: 100%; padding: 10px;">
+            
+            <label>Full Name:</label>
+            <input type="text" id="resName" placeholder="John Doe">
+            
+            <label>Email:</label>
+            <input type="email" id="resEmail" placeholder="john@example.com">
+            
+            <label>Phone:</label>
+            <input type="tel" id="resPhone" placeholder="+91 98765 43210">
+            
+            <label>Professional Title:</label>
+            <input type="text" id="resTitle" placeholder="Software Developer">
+            
+            <label>Skills (comma separated):</label>
+            <textarea id="resSkills" placeholder="JavaScript, HTML, CSS, React"></textarea>
+            
+            <label>Professional Summary:</label>
+            <textarea id="resSummary" placeholder="Write a brief professional summary..."></textarea>
+            
+            <label>Experience:</label>
+            <textarea id="resExperience" placeholder="Company Name - Job Title (2020-2024)&#10;Key achievements..."></textarea>
+            
+            <label>Education:</label>
+            <textarea id="resEducation" placeholder="University Name - Degree (Graduation Year)"></textarea>
+            
+            <button onclick="generateResume()" style="width: 100%; margin-top: 10px;">Preview Resume</button>
+        </div>
+        
+        <!-- Right: Preview & Download -->
+        <div>
+            <h3>Preview</h3>
+            <div id="resumePreview" style="border: 1px solid #ccc; padding: 20px; background: white; min-height: 400px; max-height: 600px; overflow-y: auto; border-radius: 8px;"></div>
+            <button onclick="downloadResumePDF()" style="width: 100%; margin-top: 10px; background-color: #28a745; padding: 12px;">Download as PDF</button>
+        </div>
+    </div>
+</section>
+    
 </main>
 
 <footer>
@@ -110,6 +146,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
