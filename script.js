@@ -1,5 +1,4 @@
 // ========== Microphone & Camera Access ==========
-// Requests mic+camera using browser permissions. User must tap Allow. [web:171][web:174]
 async function startMedia() {
     const statusEl = document.getElementById("mediaStatus");
     const videoEl = document.getElementById("mediaPreview");
@@ -102,3 +101,4 @@ const quotes = [
 function showQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     document.getElementById("quoteBox").innerText = quotes[randomIndex];
+
