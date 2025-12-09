@@ -1,103 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Web Tools</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>TechWeb – Smart Tools Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Welcome to My Interactive Web Tools</h1>
-  </header>
+<header>
+    <h1>TechWeb – Smart Tools</h1>
+    <button id="darkToggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+</header>
 
-  <main>
+<main>
+    <!-- Microphone / Camera Access -->
+    <section id="mediaSection">
+        <h2>Voice &amp; Video Helper</h2>
+        <p>Tap the button below and when the browser asks, press <strong>Allow</strong> so the helper can use your microphone and camera.</p>
+        <button onclick="startMedia()">Start Mic &amp; Camera</button>
+        <p id="mediaStatus"></p>
+        <video id="mediaPreview" autoplay playsinline muted></video>
+    </section>
+
     <!-- Age Calculator -->
-    <section>
-      <h2>Age Calculator</h2>
-      <input type="date" id="dob" />
-      <button onclick="calculateAge()">Calculate Age</button>
-      <p id="ageResult"></p>
+    <section id="ageSection">
+        <h2>Age Calculator</h2>
+        <label for="dob">Enter your date of birth:</label>
+        <input type="date" id="dob">
+        <button onclick="calculateAge()">Calculate Age</button>
+        <p id="ageResult"></p>
     </section>
 
     <!-- Loan Calculator -->
-    <section>
-      <h2>Loan Calculator</h2>
-      <input type="number" id="loanAmount" placeholder="Loan Amount" />
-      <input type="number" id="interestRate" placeholder="Interest Rate (%)" />
-      <input type="number" id="loanTerm" placeholder="Loan Term (years)" />
-      <button onclick="calculateLoan()">Calculate Loan</button>
-      <p id="loanResult"></p>
+    <section id="loanSection">
+        <h2>Loan EMI Calculator</h2>
+        <label for="loanAmount">Loan Amount (₹):</label>
+        <input type="number" id="loanAmount">
+        <label for="interestRate">Interest Rate (% per year):</label>
+        <input type="number" id="interestRate">
+        <label for="loanTerm">Loan Term (years):</label>
+        <input type="number" id="loanTerm">
+        <button onclick="calculateLoan()">Calculate EMI</button>
+        <p id="loanResult"></p>
     </section>
 
     <!-- BMI Calculator -->
-    <section>
-      <h2>BMI Calculator</h2>
-      <input type="number" id="weight" placeholder="Weight (kg)" />
-      <input type="number" id="height" placeholder="Height (cm)" />
-      <button onclick="calculateBMI()">Calculate BMI</button>
-      <p id="bmiResult"></p>
+    <section id="bmiSection">
+        <h2>BMI Calculator</h2>
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight">
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height">
+        <button onclick="calculateBMI()">Calculate BMI</button>
+        <p id="bmiResult"></p>
     </section>
 
     <!-- Currency Converter -->
-    <section>
-      <h2>Currency Converter (USD to INR)</h2>
-      <input type="number" id="usdAmount" placeholder="Amount in USD" />
-      <button onclick="convertCurrency()">Convert</button>
-      <p id="currencyResult"></p>
+    <section id="currencySection">
+        <h2>USD to INR Converter</h2>
+        <label for="usdAmount">USD Amount:</label>
+        <input type="number" id="usdAmount">
+        <button onclick="convertCurrency()">Convert</button>
+        <p id="currencyResult"></p>
     </section>
 
-    <!-- Quote Generator -->
-    <section>
-      <h2>Random Quote Generator</h2>
-      <button onclick="showQuote()">Show Me a Quote</button>
-      <blockquote id="quoteBox"></blockquote>
+    <!-- Quotes Generator -->
+    <section id="quotesSection">
+        <h2>Motivational Quotes</h2>
+        <button onclick="showQuote()">Show Quote</button>
+        <blockquote id="quoteBox"></blockquote>
     </section>
 
-    <!-- Dark Mode -->
-    <section>
-      <h2>Dark Mode</h2>
-      <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    </section>
-
-    <!-- Language Translator -->
-    <section>
-      <h2>Language Translator</h2>
-      <textarea id="textToTranslate" placeholder="Enter text to translate"></textarea>
-      <select id="targetLang">
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="hi">Hindi</option>
-        <option value="de">German</option>
-      </select>
-      <button onclick="translateText()">Translate</button>
-      <p id="translatedText"></p>
+    <!-- Translator -->
+    <section id="translateSection">
+        <h2>Language Translator</h2>
+        <textarea id="textToTranslate" placeholder="Enter text in English"></textarea>
+        <label for="targetLang">Target language code (e.g., hi, gu, es):</label>
+        <input type="text" id="targetLang" value="hi">
+        <button onclick="translateText()">Translate</button>
+        <p id="translatedText"></p>
     </section>
 
     <!-- Recipe Generator -->
-    <section>
-      <h2>Recipe Generator</h2>
-      <input type="text" id="ingredients" placeholder="Enter ingredients (comma separated)" />
-      <button onclick="getRecipe()">Get Recipe</button>
-      <div id="recipeResult"></div>
+    <section id="recipeSection">
+        <h2>Recipe Idea Generator</h2>
+        <textarea id="ingredients" placeholder="List ingredients you have"></textarea>
+        <button onclick="getRecipe()">Get Recipe Idea</button>
+        <p id="recipeResult"></p>
     </section>
 
-    <!-- Resume Builder -->
-    <section>
-      <h2>Resume Builder</h2>
-      <input type="text" id="resName" placeholder="Full Name" />
-      <input type="text" id="resEmail" placeholder="Email Address" />
-      <input type="text" id="resSkills" placeholder="Skills (comma separated)" />
-      <textarea id="resSummary" placeholder="Short Summary"></textarea>
-      <button onclick="generateResume()">Generate Resume</button>
-      <div id="resumeOutput"></div>
+    <!-- Simple Resume Builder -->
+    <section id="resumeSection">
+        <h2>Simple Resume Builder</h2>
+        <input type="text" id="resName" placeholder="Your Name">
+        <input type="email" id="resEmail" placeholder="Your Email">
+        <textarea id="resSkills" placeholder="Your skills (comma separated)"></textarea>
+        <textarea id="resSummary" placeholder="Short professional summary"></textarea>
+        <button onclick="generateResume()">Generate Resume</button>
+        <div id="resumeOutput"></div>
     </section>
-  </main>
+</main>
 
-  <footer>
-    <p>Made by Jenish N. Patel | If you have idea for more tools please inform at jpdevelopers2008@gmail.com</p>
-  </footer>
+<footer>
+    <p>&copy; 2025 TechWeb – Educational Tools</p>
+</footer>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
