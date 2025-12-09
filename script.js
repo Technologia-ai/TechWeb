@@ -165,21 +165,148 @@ Try making a simple stir fry! Sauté your ingredients with garlic, soy sauce, an
   document.getElementById("recipeResult").innerText = fakeRecipe;
 }
 
-// ========== Resume Builder ==========
+// ========== Resume Builder with PDF Download ==========
+let resumeData = {};
+
 function generateResume() {
   const name = document.getElementById("resName").value.trim();
   const email = document.getElementById("resEmail").value.trim();
+  const phone = document.getElementById("resPhone").value.trim();
+  const title = document.getElementById("resTitle").value.trim();
   const skills = document.getElementById("resSkills").value.trim();
   const summary = document.getElementById("resSummary").value.trim();
+  const experience = document.getElementById("resExperience").value.trim();
+  const education = document.getElementById("resEducation").value.trim();
+  const photoFile = document.getElementById("resumePhoto").files[0];
 
-  let html = "";
-  if (name) html += `<h3>${name}</h3>`;
-  if (email) html += `<p><strong>Email:</strong> ${email}</p>`;
-  if (skills) html += `<p><strong>Skills:</strong> ${skills}</p>`;
-  if (summary) html += `<p><strong>Summary:</strong> ${summary}</p>`;
+  // Store data for PDF download
+  resumeData = {
+    name,
+    email,
+    phone,
+    title,
+    skills,
+    summary,
+    experience,
+    education,
+    photo: null
+  };
 
-  document.getElementById("resumeOutput").innerHTML =
-    html || "Please fill in some details above first.";
+  // Convert photo to base64 if uploaded
+  if (photoFile) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      resumeData.photo = e.target.result;
+      displayResumePreview();
+    };
+    reader.readAsDataURL(photoFile);
+  } else {
+    displayResumePreview();
+  }
 }
+
+function displayResumePreview() {
+  const {
+    name,
+    email,
+    phone,
+    title,
+    skills,
+    summary,
+    experience,
+    education,
+    photo
+  } = resumeData;
+
+  let html = `
+    <div style="font-family: Georgia, serif; line-height: 1.6;">
+      <div style="display: flex; gap: 20px; margin-bottom: 20px; border-bottom: 2px solid #6200ea; padding-bottom: 15px;">
+        ${
+          photo
+            ? `<img src="${photo}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">`
+            : ""
+        }
+        <div>
+          <h2 style="margin: 0; color: #6200ea;">${name}</h2>
+          <p style="margin: 5px 0; font-size: 14px; color: #666;">${title}</p>
+          <p style="margin: 5px 0; font-size: 12px; color: #999;">${email} | ${phone}</p>
+        </div>
+      </div>
+  `;
+
+  if (summary) {
+    html += `
+      <div style="margin-bottom: 15px;">
+        <h3 style="color: #6200ea; border-bottom: 1px solid #6200ea; padding-bottom: 5px;">Professional Summary</h3>
+        <p style="font-size: 13px;">${summary}</p>
+      </div>
+    `;
+  }
+
+  if (skills) {
+    html += `
+      <div style="margin-bottom: 15px;">
+        <h3 style="color: #6200ea; border-bottom: 1px solid #6200ea; padding-bottom: 5px;">Skills</h3>
+        <p style="font-size: 13px;">${skills.split(",").map(s => `<span style="background: #f0f0f0; padding: 3px 8px; border-radius: 3px; margin-right: 5px; display: inline-block;">${s.trim()}</span>`).join("")}</p>
+      </div>
+    `;
+  }
+
+  if (experience) {
+    html += `
+      <div style="margin-bottom: 15px;">
+        <h3 style="color: #6200ea; border-bottom: 1px solid #6200ea; padding-bottom: 5px;">Experience</h3>
+        <pre style="font-family: Arial; font-size: 12px; white-space: pre-wrap; word-wrap: break-word;">${experience}</pre>
+      </div>
+    `;
+  }
+
+  if (education) {
+    html += `
+      <div style="margin-bottom: 15px;">
+        <h3 style="color: #6200ea; border-bottom: 1px solid #6200ea; padding-bottom: 5px;">Education</h3>
+        <pre style="font-family: Arial; font-size: 12px; white-space: pre-wrap; word-wrap: break-word;">${education}</pre>
+      </div>
+    `;
+  }
+
+  html += "</div>";
+
+  document.getElementById("resumePreview").innerHTML = html;
+}
+
+function downloadResumePDF() {
+  const { name, email, phone, title, skills, summary, experience, education, photo } = resumeData;
+
+  if (!name) {
+    alert("Please fill in at least your name.");
+    return;
+  }
+
+  // Load jsPDF from CDN if not already loaded
+  if (typeof jsPDF === "undefined") {
+    const script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
+    script.onload = () => generatePDF();
+    document.head.appendChild(script);
+  } else {
+    generatePDF();
+  }
+
+  function generatePDF() {
+    const element = document.getElementById("resumePreview");
+    const opt = {
+      margin: 10,
+      filename: `${name.replace(/\s+/g, "_")}_Resume.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { orientation: "portrait", unit: "mm", format: "a4" }
+    };
+
+    html2pdf().set(opt).from(element).save();
+  }
+}
+
+
 
 
