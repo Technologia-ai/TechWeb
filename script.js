@@ -1,4 +1,4 @@
-// ========== Microphone & Camera Access ==========
+
 async function startMedia() {
     const statusEl = document.getElementById("mediaStatus");
     const videoEl = document.getElementById("mediaPreview");
@@ -101,4 +101,5 @@ const quotes = [
 function showQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     document.getElementById("quoteBox").innerText = quotes[randomIndex];
+
 
